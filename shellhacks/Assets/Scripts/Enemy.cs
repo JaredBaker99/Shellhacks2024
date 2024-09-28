@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
 
-    private void Update() {
+    private void FixedUpdate() {
         if (target != null){
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
