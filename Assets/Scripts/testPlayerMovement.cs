@@ -6,7 +6,7 @@ public class testPlayerMovement : MonoBehaviour
 {
     public ChemicalManager cm;
     
-    public float moveSpeed = 5f;  // Speed of the player movement
+    [SerializeField] float moveSpeed;  // Speed of the player movement
     public Rigidbody2D rb;        // Reference to the Rigidbody2D component
 
     Vector2 movement;  // Store the player's movement input
@@ -22,7 +22,7 @@ public class testPlayerMovement : MonoBehaviour
 	{
 		this.transform.rotation = new Quaternion(0, -1, 0, 0);
 	}
-	else
+	else if(movement.x > 0)
 	{
 		this.transform.rotation = new Quaternion(0, 0, 0, 0);
 	}
