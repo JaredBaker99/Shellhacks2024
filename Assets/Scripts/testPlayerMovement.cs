@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class testPlayerMovement : MonoBehaviour
 {
@@ -31,6 +32,19 @@ public class testPlayerMovement : MonoBehaviour
 	{
 		Debug.Log("Attack");
 	}
+	
+	if(Input.GetKeyDown(KeyCode.Escape))
+	{
+		Debug.Log("Lose");
+		SceneManager.LoadSceneAsync(3);
+	}
+	
+	if(Input.GetKeyDown(KeyCode.E))
+	{
+		Debug.Log("Win");
+		SceneManager.LoadSceneAsync(2);
+	}
+		
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
@@ -44,26 +58,22 @@ public class testPlayerMovement : MonoBehaviour
     {
 	if(other.gameObject.CompareTag("H"))
     	{
-    		Debug.Log("H");
-    		cm.chemicals.Add("H");
+    		cm.AddChemical("H");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("Cl"))
     	{
-    		Debug.Log("Cl");
-    		cm.chemicals.Add("Cl");
+    		cm.AddChemical("Cl");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("O"))
     	{
-    		Debug.Log("O");
-    		cm.chemicals.Add("O");
+    		cm.AddChemical("O");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("Br"))
     	{
-    		Debug.Log("Br");
-    		cm.chemicals.Add("Br");
+    		cm.AddChemical("Br");
     		Destroy(other.gameObject);
     	}
     }
