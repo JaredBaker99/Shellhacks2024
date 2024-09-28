@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Chemical
+  - H
+  - Cl
+  - O
+  - Br
   layers:
   - Default
   - TransparentFX
@@ -38,6 +43,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 949091541
+    locked: 0
+  - name: Map
+    uniqueID: 218238239
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
