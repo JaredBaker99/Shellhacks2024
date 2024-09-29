@@ -9,6 +9,7 @@ TagManager:
   - Cl
   - O
   - Br
+  - Enemy
   layers:
   - Default
   - TransparentFX

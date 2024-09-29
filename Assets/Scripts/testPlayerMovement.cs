@@ -18,23 +18,28 @@ public class testPlayerMovement : MonoBehaviour
 
 	//public GameObject swing;
 
-	[SerializeField] float swingTime; 
+	[SerializeField] float attackLength; 
 
-	[SerializeField] float timeBetweenSwings; 
+	[SerializeField] float timeBetweenAttacks; 
+
+	GameObject attackArea;
+
 	SpriteRenderer swingSprite;
 	Animator swingAnimator;
 
 	BoxCollider2D swingCollider;
 
-	Boolean canSwing;
+	Boolean isAttacking;
 
-	float remainingTime;
+	float attackTimer;
 
-	float swingCooldown;
+	float attackCooldown;
 
 	void Start(){
 		//swingAnimator = swing.GetComponent<Animator>();
 		//swingCollider = swing.GetComponent<BoxCollider2D>();
+
+		attackArea = transform.GetChild(0).gameObject;
 	}
 
     // Update is called once per frame
@@ -93,7 +98,17 @@ public class testPlayerMovement : MonoBehaviour
 	
 	if(Input.GetKeyDown(KeyCode.Mouse0))
 	{
-		Debug.Log("Attack");
+		attack();
+
+	}
+	if(isAttacking){
+		attackTimer += Time.deltaTime;
+
+		if(attackTimer >= attackLength){
+			attackTimer = 0;
+			isAttacking = false;
+			attackArea.SetActive(false);
+		}
 	}
 	
 	if(Input.GetKeyDown(KeyCode.Escape))
@@ -139,6 +154,11 @@ public class testPlayerMovement : MonoBehaviour
     		Destroy(other.gameObject);
     	}
     }
+
+	void attack(){
+		isAttacking = true;
+		attackArea.SetActive(true);
+	}
     
     
 }
