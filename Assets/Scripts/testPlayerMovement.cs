@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class testPlayerMovement : MonoBehaviour
 {
@@ -42,45 +43,44 @@ public class testPlayerMovement : MonoBehaviour
         // Get input from player for horizontal (left/right) and vertical (up/down) movement
         movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
         movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
-        
-		if (movement.x < 0)
-		{
-			this.transform.rotation = new Quaternion(0, -1, 0, 0);
-		}
-		else if(movement.x > 0)
-		{
-			this.transform.rotation = new Quaternion(0, 0, 0, 0);
-		}
-		
-		if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
-		{
-			remainingTime = swingTime;
-			swingCooldown = timeBetweenSwings;
-			swing.GetComponent<SpriteRenderer>().enabled = true;
-			swingCollider.enabled = true;
-			canSwing = false;
-			//swingAnimator.enabled = true;
-			Debug.Log("Attack");
-		}
-		if(remainingTime > 0.5f){
-			remainingTime-= Time.deltaTime;
-		}
-		else if(remainingTime < 0.5){
-			swing.GetComponent<SpriteRenderer>().enabled = false;
-			swingCollider.enabled = false;
-		}
+        if (movement.x < 0)
+        {
+          this.transform.rotation = new Quaternion(0, -1, 0, 0);
+        }
+        else if(movement.x > 0)
+        {
+          this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
+        {
+          remainingTime = swingTime;
+          swingCooldown = timeBetweenSwings;
+          swing.GetComponent<SpriteRenderer>().enabled = true;
+          swingCollider.enabled = true;
+          canSwing = false;
+          //swingAnimator.enabled = true;
+          Debug.Log("Attack");
+        }
+        if(remainingTime > 0.5f){
+          remainingTime-= Time.deltaTime;
+        }
+        else if(remainingTime < 0.5){
+          swing.GetComponent<SpriteRenderer>().enabled = false;
+          swingCollider.enabled = false;
+        }
 
 
-		if(swingCooldown > 0.5f){
-			swingCooldown-= Time.deltaTime;
-		}
-		else if(swingCooldown < 0.5f){
-			canSwing = true;
-		}
+        if(swingCooldown > 0.5f){
+          swingCooldown-= Time.deltaTime;
+        }
+        else if(swingCooldown < 0.5f){
+          canSwing = true;
+        }
 
-		if(health < 0){
-			Debug.Log("health");
-		}
+        if(health < 0){
+          Debug.Log("health");
+        }
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
@@ -94,26 +94,22 @@ public class testPlayerMovement : MonoBehaviour
     {
 	if(other.gameObject.CompareTag("H"))
     	{
-    		Debug.Log("H");
-    		cm.chemicals.Add("H");
+    		cm.AddChemical("H");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("Cl"))
     	{
-    		Debug.Log("Cl");
-    		cm.chemicals.Add("Cl");
+    		cm.AddChemical("Cl");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("O"))
     	{
-    		Debug.Log("O");
-    		cm.chemicals.Add("O");
+    		cm.AddChemical("O");
     		Destroy(other.gameObject);
     	}
     	else if(other.gameObject.CompareTag("Br"))
     	{
-    		Debug.Log("Br");
-    		cm.chemicals.Add("Br");
+    		cm.AddChemical("Br");
     		Destroy(other.gameObject);
     	}
     }
