@@ -41,17 +41,6 @@ public class testPlayerMovement : MonoBehaviour
     void Update()
     {
         ProcessInputs();
-        // Get input from player for horizontal (left/right) and vertical (up/down) movement
-        // movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
-        // movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
-        // if (movement.x < 0)
-        // {
-        //   this.transform.rotation = new Quaternion(0, -1, 0, 0);
-        // }
-        // else if(movement.x > 0)
-        // {
-        //   this.transform.rotation = new Quaternion(0, 0, 0, 0);
-        // }
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         {
