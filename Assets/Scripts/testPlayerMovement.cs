@@ -21,16 +21,16 @@ public class testPlayerMovement : MonoBehaviour
 	[SerializeField] float swingTime; 
 
 	[SerializeField] float timeBetweenSwings; 
-	SpriteRenderer swingSprite;
-	Animator swingAnimator;
+	// SpriteRenderer swingSprite;
+	// Animator swingAnimator;
 
-	BoxCollider2D swingCollider;
+	// BoxCollider2D swingCollider;
 
-	Boolean canSwing;
+	// Boolean canSwing;
 
-	float remainingTime;
+	// float remainingTime;
 
-	float swingCooldown;
+	// float swingCooldown;
 
 	void Start(){
 		//swingAnimator = swing.GetComponent<Animator>();
