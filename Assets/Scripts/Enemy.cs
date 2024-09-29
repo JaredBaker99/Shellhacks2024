@@ -52,15 +52,15 @@ public class Enemy : MonoBehaviour
         // state = 1 is seeking
         // state = 2 is attacking
         switch(state){
-            case 0:{
+            case 0:{ // Patrolling
                 BasicPlayerDetection();
                 break;
             }
-            case 1:{
+            case 1:{ // Move towards Player
                 moveTowardsPlayer();
                 break;
             }
-            case 2:{
+            case 2:{ // Attack
                 attack();
                 break;
             }
@@ -71,25 +71,32 @@ public class Enemy : MonoBehaviour
 
     void BasicPlayerDetection(){
        
-        detectionRayCastHit = Physics2D.CircleCast(new Vector2(transform.position.x , transform.position.y),seekingRange,new Vector2(transform.position.x , transform.position.y));
+        detectionRayCastHit = Physics2D.CircleCast(new Vector2(transform.position.x , transform.position.y),7f,new Vector2(transform.position.x , transform.position.y));
 
 
-        Debug.DrawLine(new Vector2(transform.position.x , transform.position.y ),new Vector2(transform.position.x + 5f , transform.position.y + 5f),Color.blue);
+        Debug.DrawLine(new Vector2(transform.position.x , transform.position.y ),new Vector2(transform.position.x + seekingRange , transform.position.y + 5f),Color.blue);
         if(detectionRayCastHit.collider.name.CompareTo("Player") == 0){
+            Debug.Log("PlayerBeingSeeked");
             playerPosition = detectionRayCastHit.collider.transform.position;
             state = 1;
         }
         else{
-            if(!agent.hasPath){
-                randomPosition = new Vector2(UnityEngine.Random.Range(transform.position.x - patrollingRange,transform.position.x + patrollingRange),UnityEngine.Random.Range(transform.position.y - patrollingRange,transform.position.y + patrollingRange));
-                agent.destination = randomPosition;
-            }
             state = 0;
         }
+        // else{
+        //     if(!agent.hasPath){
+        //         randomPosition = new Vector2(UnityEngine.Random.Range(transform.position.x - patrollingRange,transform.position.x + patrollingRange),UnityEngine.Random.Range(transform.position.y - patrollingRange,transform.position.y + patrollingRange));
+        //         agent.SetDestination(randomPosition);
+        //         state = 0;
+        //     }
+        //     else{
+        //         state = 1;
+        //     }
+        // }
     }
 
     void moveTowardsPlayer(){
-        agent.destination = playerPosition;
+        agent.SetDestination(playerPosition);
         BasicPlayerDetection();
         if(canAttack()){
             Debug.Log("CANATTACK");
@@ -100,7 +107,6 @@ public class Enemy : MonoBehaviour
     Boolean canAttack(){
         attackingRayCast = Physics2D.CircleCast(new UnityEngine.Vector2(transform.position.x , transform.position.y),attackingRange,new Vector2(transform.position.x , transform.position.y));
         if(attackingRayCast.collider.name.CompareTo("Player") == 0){
-            playerPosition = detectionRayCastHit.collider.transform.position;
             return true;
         }
         else{
@@ -109,7 +115,6 @@ public class Enemy : MonoBehaviour
         // Can attack
     }
     void attack(){
-        
         // Swing at player
         Debug.Log("attacking");
         state = 1;
