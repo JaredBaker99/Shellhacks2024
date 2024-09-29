@@ -15,7 +15,6 @@ public class ChestController : MonoBehaviour
         if (!isOpen){
             isOpen = true;
             int randomIndex = Random.Range(0, formula.Length - 1);
-            Debug.Log(randomIndex);
 	    cm.RandomChemical(name[randomIndex], formula[randomIndex]);
         }
     }

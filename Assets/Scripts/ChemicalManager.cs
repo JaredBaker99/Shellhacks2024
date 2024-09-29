@@ -45,7 +45,6 @@ public class ChemicalManager : MonoBehaviour
 	{
 	    acidForm = form;
 	    acidName = name;
-	    Debug.Log("Random Chemical: " + acidName); // Log to verify it’s working
 	}
 	
 	public void CheckFormula(string chemical)
