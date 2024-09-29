@@ -39,7 +39,7 @@ public class testPlayerMovement : MonoBehaviour
 		SceneManager.LoadSceneAsync(3);
 	}
 	
-	if(Input.GetKeyDown(KeyCode.E))
+	if(Input.GetKeyDown(KeyCode.P))
 	{
 		Debug.Log("Win");
 		SceneManager.LoadSceneAsync(2);
