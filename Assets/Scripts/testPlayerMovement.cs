@@ -43,6 +43,7 @@ public class testPlayerMovement : MonoBehaviour
         // Get input from player for horizontal (left/right) and vertical (up/down) movement
         movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
         movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
+<<<<<<< HEAD
         if (movement.x < 0)
         {
           this.transform.rotation = new Quaternion(0, -1, 0, 0);
@@ -81,6 +82,35 @@ public class testPlayerMovement : MonoBehaviour
         if(health < 0){
           Debug.Log("health");
         }
+=======
+        
+	if (movement.x < 0)
+	{
+		this.transform.rotation = new Quaternion(0, -1, 0, 0);
+	}
+	else if(movement.x > 0)
+	{
+		this.transform.rotation = new Quaternion(0, 0, 0, 0);
+	}
+	
+	if(Input.GetKeyDown(KeyCode.Mouse0))
+	{
+		Debug.Log("Attack");
+	}
+	
+	if(Input.GetKeyDown(KeyCode.Escape))
+	{
+		Debug.Log("Lose");
+		SceneManager.LoadSceneAsync(3);
+	}
+	
+	if(Input.GetKeyDown(KeyCode.E))
+	{
+		Debug.Log("Win");
+		SceneManager.LoadSceneAsync(2);
+	}
+		
+>>>>>>> parent of 481312f (Display random chemical)
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
