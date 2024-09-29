@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrollingRange: 3
   seekingRange: 12
-  attackingRange: 3
+  attackingRange: 5
   lungeForce: 20
 --- !u!212 &79782386
 SpriteRenderer:
@@ -34770,7 +34770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cm: {fileID: 205742489}
-  moveSpeed: 10
+  moveSpeed: 5
   rb: {fileID: 1013074511}
   health: 0
   swing: {fileID: 592010495}
