@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
     public bool isInRange;
+    public bool ineracted = false;
     public KeyCode interactKey;
     public UnityEvent interactAction;
+    public GameObject uiElement;
     void Start()
     {
         
@@ -20,23 +23,41 @@ public class Interactable : MonoBehaviour
         {
             if(Input.GetKeyDown(interactKey))
             {
+            	ineracted = true;
+            	HideUI();
                 interactAction.Invoke();
             }
-        }
-        
+        }  
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && !ineracted)
         {
             isInRange = true;
-            Debug.Log("Player is in range");
+            ShowUI();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other) 
+    {
         isInRange = false;
-            Debug.Log("Player not in range");
+        HideUI();
     }
+    
+    void ShowUI()
+	{
+		if (uiElement != null)
+		{
+		    uiElement.SetActive(true);
+		}
+	}
+
+	void HideUI()
+	{
+		if (uiElement != null)
+		{
+		    uiElement.SetActive(false);
+		}
+	}
 }
