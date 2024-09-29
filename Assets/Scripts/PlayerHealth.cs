@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
             health = maxHealth;
         } else if (health <= 0) {
             health = 0f;
-            Debug.Log("Player Respawn");
+            SceneManager.LoadSceneAsync(3);
         }
     }
 }

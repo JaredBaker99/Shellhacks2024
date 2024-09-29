@@ -12,12 +12,10 @@ public class ShowHints : MonoBehaviour
 	    if (Input.GetKey(KeyCode.Tab))
 	    {
 		ShowUI();
-		Debug.Log("Tab is pressed");
 	    }
 	    else
 	    {
 		HideUI();
-		Debug.Log("Tab is released");
 	    }
 	}
 
