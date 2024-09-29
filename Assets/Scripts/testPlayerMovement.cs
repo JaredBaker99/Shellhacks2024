@@ -8,7 +8,8 @@ public class testPlayerMovement : MonoBehaviour
 {
     public ChemicalManager cm;
     
-    [SerializeField] float moveSpeed;  // Speed of the player movement
+    [SerializeField] float movementSpeed;  // Speed of the player movement
+	private Vector2 moveDirection;
     public Rigidbody2D rb;        // Reference to the Rigidbody2D component
 
     Vector2 movement;  // Store the player's movement input
@@ -21,16 +22,8 @@ public class testPlayerMovement : MonoBehaviour
 	[SerializeField] float swingTime; 
 
 	[SerializeField] float timeBetweenSwings; 
-	SpriteRenderer swingSprite;
-	Animator swingAnimator;
 
-	BoxCollider2D swingCollider;
-
-	Boolean canSwing;
-
-	float remainingTime;
-
-	float swingCooldown;
+	
 
 	void Start(){
 		//swingAnimator = swing.GetComponent<Animator>();
@@ -41,17 +34,19 @@ public class testPlayerMovement : MonoBehaviour
     void Update()
     {
         // Get input from player for horizontal (left/right) and vertical (up/down) movement
-        movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
-        movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
-        if (movement.x < 0)
-        {
-          this.transform.rotation = new Quaternion(0, -1, 0, 0);
-        }
-        else if(movement.x > 0)
-        {
-          this.transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
+        // movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
+        // movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
 
+        // if (movement.x < 0)
+        // {
+        //   this.transform.rotation = new Quaternion(0, -1, 0, 0);
+        // }
+        // else if(movement.x > 0)
+        // {
+        //   this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        // }
+		
+		ProcessInputs();
         // if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         // {
         //   remainingTime = swingTime;
@@ -82,14 +77,14 @@ public class testPlayerMovement : MonoBehaviour
           Debug.Log("health");
         }
         
-	if (movement.x < 0)
-	{
-		this.transform.rotation = new Quaternion(0, -1, 0, 0);
-	}
-	else if(movement.x > 0)
-	{
-		this.transform.rotation = new Quaternion(0, 0, 0, 0);
-	}
+	// if (movement.x < 0)
+	// {
+	// 	transform.rotation = new Quaternion(0, -1, 0, 0);
+	// }
+	// else if(movement.x > 0)
+	// {
+	// 	transform.rotation = new Quaternion(0, 0, 0, 0);
+	// }
 	
 	if(Input.GetKeyDown(KeyCode.Mouse0))
 	{
@@ -110,10 +105,9 @@ public class testPlayerMovement : MonoBehaviour
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
-    void FixedUpdate()
+    void FixedUpdate() 
     {
-        // Apply the movement to the player's Rigidbody2D
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Move();
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -138,6 +132,19 @@ public class testPlayerMovement : MonoBehaviour
     		cm.AddChemical("Br");
     		Destroy(other.gameObject);
     	}
+    }
+
+	void ProcessInputs()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector2(moveX, moveY).normalized;
+    }
+
+    void Move () 
+    {
+            rb.MovePosition(rb.position + moveDirection * movementSpeed * Time.fixedDeltaTime);
     }
     
     

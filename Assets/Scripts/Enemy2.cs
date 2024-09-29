@@ -10,6 +10,8 @@ public class Enemy2 : MonoBehaviour
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
 
+    private int enemyHealth;
+
     private void FixedUpdate() {
         if (target != null){
             float step = speed * Time.deltaTime;
@@ -38,5 +40,20 @@ public class Enemy2 : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) {
             target = null;
         }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        enemyHealth -= damageAmount;
+        if (enemyHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Destroy(gameObject);
     }
 }
