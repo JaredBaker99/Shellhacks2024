@@ -16,7 +16,7 @@ public class testPlayerMovement : MonoBehaviour
 	[SerializeField] float health; 
 
 
-	public GameObject swing;
+	//public GameObject swing;
 
 	[SerializeField] float swingTime; 
 
@@ -33,8 +33,8 @@ public class testPlayerMovement : MonoBehaviour
 	float swingCooldown;
 
 	void Start(){
-		swingAnimator = swing.GetComponent<Animator>();
-		swingCollider = swing.GetComponent<BoxCollider2D>();
+		//swingAnimator = swing.GetComponent<Animator>();
+		//swingCollider = swing.GetComponent<BoxCollider2D>();
 	}
 
     // Update is called once per frame
@@ -43,7 +43,6 @@ public class testPlayerMovement : MonoBehaviour
         // Get input from player for horizontal (left/right) and vertical (up/down) movement
         movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
         movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
-<<<<<<< HEAD
         if (movement.x < 0)
         {
           this.transform.rotation = new Quaternion(0, -1, 0, 0);
@@ -53,36 +52,35 @@ public class testPlayerMovement : MonoBehaviour
           this.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
-        {
-          remainingTime = swingTime;
-          swingCooldown = timeBetweenSwings;
-          swing.GetComponent<SpriteRenderer>().enabled = true;
-          swingCollider.enabled = true;
-          canSwing = false;
-          //swingAnimator.enabled = true;
-          Debug.Log("Attack");
-        }
-        if(remainingTime > 0.5f){
-          remainingTime-= Time.deltaTime;
-        }
-        else if(remainingTime < 0.5){
-          swing.GetComponent<SpriteRenderer>().enabled = false;
-          swingCollider.enabled = false;
-        }
+        // if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
+        // {
+        //   remainingTime = swingTime;
+        //   swingCooldown = timeBetweenSwings;
+        //   //swing.GetComponent<SpriteRenderer>().enabled = true;
+        //   swingCollider.enabled = true;
+        //   canSwing = false;
+        //   //swingAnimator.enabled = true;
+        //   Debug.Log("Attack");
+        // }
+        // if(remainingTime > 0.5f){
+        //   remainingTime-= Time.deltaTime;
+        // }
+        // else if(remainingTime < 0.5){
+        //   //swing.GetComponent<SpriteRenderer>().enabled = false;
+        //   swingCollider.enabled = false;
+        // }
 
 
-        if(swingCooldown > 0.5f){
-          swingCooldown-= Time.deltaTime;
-        }
-        else if(swingCooldown < 0.5f){
-          canSwing = true;
-        }
+        // if(swingCooldown > 0.5f){
+        //   swingCooldown-= Time.deltaTime;
+        // }
+        // else if(swingCooldown < 0.5f){
+        //   canSwing = true;
+        // }
 
         if(health < 0){
           Debug.Log("health");
         }
-=======
         
 	if (movement.x < 0)
 	{
@@ -104,13 +102,11 @@ public class testPlayerMovement : MonoBehaviour
 		SceneManager.LoadSceneAsync(3);
 	}
 	
-	if(Input.GetKeyDown(KeyCode.E))
+	if(Input.GetKeyDown(KeyCode.P))
 	{
 		Debug.Log("Win");
 		SceneManager.LoadSceneAsync(2);
 	}
-		
->>>>>>> parent of 481312f (Display random chemical)
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
