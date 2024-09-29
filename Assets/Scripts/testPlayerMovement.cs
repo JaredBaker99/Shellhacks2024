@@ -8,10 +8,10 @@ public class testPlayerMovement : MonoBehaviour
 {
     public ChemicalManager cm;
     
-    [SerializeField] float moveSpeed;  // Speed of the player movement
+    [SerializeField] float movementSpeed;  // Speed of the player movement
     public Rigidbody2D rb;        // Reference to the Rigidbody2D component
-
-    Vector2 movement;  // Store the player's movement input
+    private Vector2 moveDirection;
+    // Vector2 movement;  // Store the player's movement input
 
 	[SerializeField] float health; 
 
@@ -40,17 +40,18 @@ public class testPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ProcessInputs();
         // Get input from player for horizontal (left/right) and vertical (up/down) movement
-        movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
-        movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
-        if (movement.x < 0)
-        {
-          this.transform.rotation = new Quaternion(0, -1, 0, 0);
-        }
-        else if(movement.x > 0)
-        {
-          this.transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
+        // movement.x = Input.GetAxisRaw("Horizontal");  // A/D or Left/Right Arrow
+        // movement.y = Input.GetAxisRaw("Vertical");    // W/S or Up/Down Arrow
+        // if (movement.x < 0)
+        // {
+        //   this.transform.rotation = new Quaternion(0, -1, 0, 0);
+        // }
+        // else if(movement.x > 0)
+        // {
+        //   this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        // }
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && canSwing)
         {
@@ -87,7 +88,8 @@ public class testPlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Apply the movement to the player's Rigidbody2D
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        // rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Move();
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -114,5 +116,17 @@ public class testPlayerMovement : MonoBehaviour
     	}
     }
     
+    void ProcessInputs()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector2(moveX, moveY).normalized;
+    }
+
+    void Move () 
+    {
+            rb.velocity = new Vector2(moveDirection.x * movementSpeed, moveDirection.y * movementSpeed);
+    }
     
 }
